@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Year To Date Transaction</title>
+</head>
+<body>
+    <center>
+    <table>
+        <tr>
+            <th>Month</th>
+            <th>Amount</th>
+        </tr>
+
+        {% for key, values in data.items %}
+        <tr>
+            <td>{{key}}</td><td>{{values}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+        </center>
+</body>
+</html>
