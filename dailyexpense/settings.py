@@ -154,7 +154,8 @@ SOCIAL_AUTH_PIPELINE = (
 )
 
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '9562851941-o030r29p5o5u859jo4o9kg90psj8civ8.apps.googleusercontent.com'
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'UKDKOjUeDxijqdkJMHenYBMI'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'OlsCeLZjOvoZcEK_JCHDszhH'
+
 
 SOCIAL_AUTH_LOGIN_ERROR_URL = '/login'
 
@@ -163,3 +164,8 @@ SOCIAL_AUTH_URL_NAMESPACE = 'social'
 
 TIME_ZONE =  'Asia/Kolkata'
 # USE_TZ = False
+
+try:
+    from .local_settings import *
+except ImportError:
+    pass

@@ -6,6 +6,6 @@ class AccountConfig(AppConfig):
     name = 'account'
 
     def ready(self):
-        print("readyyyyy")
+        print("loading signals..")
 
         import account.signals

@@ -130,8 +130,59 @@ def home(request):
 
 
 @login_required
-def today(request):
-    return render(request, 'today.html')
+def daily(request):
+    import datetime
+    from datetime import timedelta
+    day = request.GET.get('day')
+    if day:
+        current_day = datetime.datetime.strptime(day, "%Y-%m-%d").date()
+    else:
+        current_day = datetime.date.today()
+    next_day = current_day + timedelta(days=1)
+    prev_day = current_day - timedelta(days=1)
+    trans = Txn.objects.filter(user=request.user, transaction_type=2, transaction_datetime__date=current_day).order_by('-transaction_datetime')
+    data = {
+        'trans': trans,
+        'current_day': current_day,
+        'next_day': next_day,
+        'prev_day': prev_day,
+        'param_next_day': next_day.__str__(),
+        'param_prev_day': prev_day.__str__(),
+
+    }
+    print( trans)
+    return render(request, 'daily.html', data)
+
+@login_required
+def weekly(request):
+    import datetime
+    from datetime import timedelta
+    day = request.GET.get('day')
+    if day:
+        current_day = datetime.datetime.strptime(day, "%Y-%m-%d").date()
+    else:
+        current_day = datetime.date.today()
+
+    first_day_of_week = current_day - datetime.timedelta(current_day.weekday())
+    last_day_of_week = first_day_of_week + timedelta(days=6)
+
+
+    weekly_days = {}
+    for i in range(7):
+        day = first_day_of_week + timedelta(days=i)
+        weekly_days[day.__str__()] = Sum(Case(When(Q(transaction_datetime__date=day), then=F('amount')), output_field=FloatField()))
+    trans = Txn.objects.filter(user=request.user, transaction_type=2).aggregate(**weekly_days)
+    data = {
+        'trans': trans,
+        'current_day': current_day,
+        'first_day_of_week': first_day_of_week,
+        'last_day_of_week': last_day_of_week,
+        'prev_week': (first_day_of_week - timedelta(days=1)).__str__(),
+        'next_week': (last_day_of_week + timedelta(days=1)).__str__(),
+
+    }
+    print( data,'------')
+    return render(request, 'weekly.html', data)
 
 @login_required
 def year_to_date(request):

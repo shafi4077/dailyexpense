@@ -1,0 +1,20 @@
+<center>
+  <br>
+  <a href="/">Home</a>
+  <br>
+  <br>
+  <b>
+    <a href="/daily?day={{ param_prev_day }}">{{ prev_day}}</a>
+    {{ current_day }}
+    <a href="/daily?day={{ param_next_day }}">{{ next_day}}</a>
+  </b>
+  <br><br>
+  <table>
+    {% for i in trans%}
+    <tr>
+      <td>{{ i.transaction_datetime }}</td>
+      <td>{{ i.amount }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+</center>
