@@ -13,7 +13,7 @@
     {% for i in trans%}
     <tr>
       <td>{{ i.transaction_datetime }}</td>
-      <td>{{ i.amount }}</td>
+      <td>{{ i.amount }} - {{ i.payee }}</td>
     </tr>
     {% endfor %}
   </table>

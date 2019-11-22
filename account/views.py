@@ -3,6 +3,7 @@ from django.db.models import Case, When, Sum, FloatField, Q, F
 from django.db.models.functions import Coalesce
 from django.shortcuts import render
 from django.views import View
+from django.http.response import JsonResponse
 
 from expense.models import Transaction as Txn
 
@@ -312,3 +313,18 @@ def this_week(request):
     )
     print (weekly)
     return render(request, 'year_to_date.html', {'data': weekly})
+
+
+class PayeeSuggestion(View):
+    def get(self, request):
+        params = request.GET
+        search_key = params.get('key')
+        data = []
+        if search_key:
+            for i in set(Txn.objects.filter(payee__icontains=search_key).values_list('payee', flat=True)):
+                data.append({
+                    'name': i,
+                    'sub_category_id': Txn.objects.filter(payee=i).order_by('-id')[0].sub_category_id
+                })
+
+        return JsonResponse(data, safe=False)

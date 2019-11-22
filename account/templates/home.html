@@ -1,81 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Daily Expense</title>
-    <style>
-     table, th {
-    }
-    table {
-        min-width: 80%;
-    }
-    table {
-      table-layout: fixed ;
-      width: 100% ;
-    }
-    td {
-      width: 25% ;
-    }
+    <head>
+        <meta charset="UTF-8">
+        <title>Daily Expense</title>
+        <style>
+
+
+            #expense th {
+                text-align: left;
+            }
+            #expense td {
+               text-align: left;
+            }
+            #expense {
+                margin: auto;
+                width: 80% !important;
+            }
 
 
 
-    /* The Modal (background) */
-.modal {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
-  padding-top: 100px; /* Location of the box */
-  left: 0;
-  top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-}
+                /* The Modal (background) */
+            .modal {
+              display: none; /* Hidden by default */
+              position: fixed; /* Stay in place */
+              z-index: 1; /* Sit on top */
+              padding-top: 100px; /* Location of the box */
+              left: 0;
+              top: 0;
+              width: 100%; /* Full width */
+              height: 100%; /* Full height */
+              overflow: auto; /* Enable scroll if needed */
+              background-color: rgb(0,0,0); /* Fallback color */
+              background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+            }
 
-/* Modal Content */
-.modal-content {
-  background-color: #fefefe;
-  margin: auto;
-  padding: 20px;
-  border: 1px solid #888;
-  width: 80%;
-}
+            /* Modal Content */
+            .modal-content {
+              background-color: #fefefe;
+              margin: auto;
+              padding: 20px;
+              border: 1px solid #888;
+              width: 80%;
+            }
 
-/* The Close Button */
-.close {
-  color: #aaaaaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-}
+            /* The Close Button */
+            .close {
+              color: #aaaaaa;
+              float: right;
+              font-size: 28px;
+              font-weight: bold;
+            }
 
-.close:hover,
-.close:focus {
-  color: #000;
-  text-decoration: none;
-  cursor: pointer;
-}
+            .close:hover,
+            .close:focus {
+              color: #000;
+              text-decoration: none;
+              cursor: pointer;
+            }
 
 
-</style>
-    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
-
-<link href="https://cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/e8bddc60e73c1ec2475f827be36e1957af72e2ea/build/css/bootstrap-datetimepicker.css" rel="stylesheet">
-    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-
-<script type="text/javascript” src=”https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.js"></script>
-
-<script src="https://cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/e8bddc60e73c1ec2475f827be36e1957af72e2ea/src/js/bootstrap-datetimepicker.js"></script>
-</head>
-<body>
-
-    <center>
-        <p scope="col">Hi, {{ username }}</p>
-        <table>
+        </style>
+        <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+        <link href="https://cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/e8bddc60e73c1ec2475f827be36e1957af72e2ea/build/css/bootstrap-datetimepicker.css" rel="stylesheet">
+        <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.19/themes/cupertino/jquery-ui.css" rel="stylesheet">
+        <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+        <script type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <script type="text/javascript” src=”https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.js"></script>
+        <script src="https://cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/e8bddc60e73c1ec2475f827be36e1957af72e2ea/src/js/bootstrap-datetimepicker.js"></script>
+    </head>
+    <body>
+        <center>
+            <p scope="col">Hi, {{ username }}</p>
+            <table >
                 <tr>
                     <td>Current Balance</td>
                     <td scope="col"><button id="addBtn">(+)</button></td>
@@ -83,160 +80,150 @@
                 </tr>
             </table>
             <hr>
-        <table class="table">
-            <thead class="thead-dark">
-                <tr>
-                    <th scope="col">Today</th>
-                    <th scope="col">{{ today }}</th>
-                    <th scope="col">Activity</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <th scope="row">{{ today_income }}</th>
-                    <td><a href="/daily">{{ today_expense }}</a></td>
-                    <td>{{ today_balance }}</td>
-                </tr>
-            </tbody>
-        </table>
-        <table class="table">
-            <thead class="thead-light">
-                <tr>
-                    <th scope="col">This week</th>
-                    <th scope="col">{{ week }}</th>
-                    <th scope="col">Activity</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <th scope="row">{{ week_income }}</th>
-                    <td><a href="/weekly">{{ week_expense }}</a></td>
-                    <td>{{ week_balance }}</td>
-                </tr>
-          </tbody>
-        </table>
-        <table class="table">
-            <thead class="thead-dark">
-                <tr>
-                    <th scope="col">This Month</th>
-                    <th scope="col">{{ month }}</th>
-                    <th scope="col">Activity</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <th scope="row">{{ month_income }}</th>
-                    <td>{{ month_expense }}</td>
-                    <td>{{ month_balance }}</td>
-                </tr>
-            </tbody>
-        </table>
-        <table class="table">
-            <thead class="thead-light">
-                <tr>
-                    <th scope="col">Year to Date</th>
-                    <th scope="col">{{ year }}</th>
-                    <th scope="col">Activity</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <th scope="row">{{ year_income }}</th>
-                    <td><a href="year-to-date">{{ year_expense }}</a></td>
-                    <td>{{ year_balance }}</td>
-                </tr>
-            </tbody>
-        </table>
-        <table class="table">
-            <thead class="thead-dark">
-                <tr>
-                    <th scope="col">Up to Date</th>
-                    <th scope="col">{{ today }}</th>
-                    <th scope="col">Activity</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <th scope="row">{{ upto_date_income}}</th>
-                    <td>{{ upto_date_expense }}</td>
-                    <td>{{ upto_date_balance }}</td>
-                </tr>
-            </tbody>
-        </table>
+            <table class="table" id="expense">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Today</th>
+                        <th scope="col">{{ today }}</th>
+                        <th scope="col">Activity</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">{{ today_income }}</th>
+                        <td><a href="/daily">{{ today_expense }}</a></td>
+                        <td>{{ today_balance }}</td>
+                    </tr>
+                </tbody>
+                <thead class="thead-light">
+                    <tr>
+                        <th scope="col">This week</th>
+                        <th scope="col">{{ week }}</th>
+                        <th scope="col">Activity</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">{{ week_income }}</th>
+                        <td><a href="/weekly">{{ week_expense }}</a></td>
+                        <td>{{ week_balance }}</td>
+                    </tr>
+                </tbody>
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">This Month</th>
+                        <th scope="col">{{ month }}</th>
+                        <th scope="col">Activity</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">{{ month_income }}</th>
+                        <td>{{ month_expense }}</td>
+                        <td>{{ month_balance }}</td>
+                    </tr>
+                </tbody>
+                <thead class="thead-light">
+                    <tr>
+                        <th scope="col">Year to Date</th>
+                        <th scope="col">{{ year }}</th>
+                        <th scope="col">Activity</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">{{ year_income }}</th>
+                        <td><a href="year-to-date">{{ year_expense }}</a></td>
+                        <td>{{ year_balance }}</td>
+                    </tr>
+                </tbody>
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Up to Date</th>
+                        <th scope="col">{{ today }}</th>
+                        <th scope="col">Activity</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">{{ upto_date_income}}</th>
+                        <td>{{ upto_date_expense }}</td>
+                        <td>{{ upto_date_balance }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </center>
 
-    </center>
+        <!-- The Modal -->
+        <div id="myModal" class="modal">
+        <!-- Modal content -->
+            <div class="modal-content">
+            <span class="close">&times;</span>
+            <p>Add Income/Expense</p>
 
-    <!-- The Modal -->
-<div id="myModal" class="modal">
-
-  <!-- Modal content -->
-  <div class="modal-content">
-    <span class="close">&times;</span>
-    <p>Add Income/Expense</p>
-      <form>
-          <table>
-              <tr>
-                  <td>
-                      <label class="radio-inline"><input type="radio" name="optradio" value="2" checked>Expense</label>
-                      <label class="radio-inline"><input type="radio" name="optradio" value="1">Income</label>
-                      <div class="container">
-                        <div class="row">
-                            <div class='col-sm-6'>
-                                <div class="form-group">
-                                    <div class='input-group date' id='datetimepicker1'>
-                                        <input type='text' class="form-control" />
-                                        <span class="input-group-addon">
-                                            <span class="glyphicon glyphicon-calendar"></span>
-                                        </span>
+                  <table>
+                       <form>
+                      <tr>
+                          <td>
+                              <label class="radio-inline"><input type="radio" name="optradio" value="2" checked>Expense</label>
+                              <label class="radio-inline"><input type="radio" name="optradio" value="1">Income</label>
+                              <div class="container">
+                                <div class="row">
+                                    <div class='col-sm-6'>
+                                        <div class="form-group">
+                                            <div class='input-group date' id='datetimepicker1'>
+                                                <input type='text' class="form-control" />
+                                                <span class="input-group-addon">
+                                                    <span class="glyphicon glyphicon-calendar"></span>
+                                                </span>
+                                            </div>
+                                        </div>
                                     </div>
+                                    <script type="text/javascript">
+                                        $(function () {
+                                            $('#datetimepicker1').datetimepicker({
+                                                format : 'DD/MM/YYYY HH:mm',
+                                                defaultDate: new Date(),
+
+                                            });
+                                        });
+                                    </script>
                                 </div>
                             </div>
-                            <script type="text/javascript">
-                                $(function () {
-                                    $('#datetimepicker1').datetimepicker({
-                                        format : 'DD/MM/YYYY HH:mm',
-                                        defaultDate: new Date(),
-
-                                    });
-                                });
-                            </script>
-                        </div>
-                    </div>
-                  </td>
-              </tr>
-              <tr>
-                  <td>Amount:</td>
-                  <td>
-                      <input type="number" step="any" min="0" placeholder="0.0" id="amount">
-                  </td>
-              </tr>
-              <tr>
-                  <td>Payee:</td>
-                  <td>
-                      <br>
-                      <input id="payee" type="text">
-                  </td>
-              </tr>
-              <tr>
-                  <td>Category</td>
-                  <td>
-                      <br>
-                      <select id="category">
-                        </select>
-                  </td>
-              </tr>
-              <tr>
-                  <td></td>
-                  <td><br><button type="button" id="add_btn">Submit</button> </td>
-              </tr>
-          </table>
+                          </td>
+                      </tr>
+                      <tr>
+                          <td>Amount:</td>
+                          <td>
+                              <input type="number" step="any" min="0" placeholder="0.0" id="amount">
+                          </td>
+                      </tr>
+                      <tr>
+                          <td width="50%">Payee:</td>
+                          <td>
+                              <br>
+                              <input id="payee" type="text">
+                          </td>
+                      </tr>
+                      <tr>
+                          <td>Category</td>
+                          <td>
+                              <br>
+                              <select id="category"></select>
+                          </td>
+                      </tr>
+                      <tr>
+                          <td></td>
+                          <td><br><button type="button" id="add_btn">Submit</button> </td>
+                      </tr>
+                           </form>
+                  </table>
 
 
-      </form>
-  </div>
 
-</div>
-</body>
+          </div>
+        </div>
+    </body>
 </html>
 
 <script>
@@ -308,4 +295,32 @@
         });
 
     });
+    var items = [];
+    $("#payee").autocomplete({
+            source: items
+            });
+
+    $("#payee").on('keyup', function() {
+        $.getJSON( "/payee-suggestion/?key="+$(this).val(), function( data ) {
+            items = [];
+            $.each( data, function( key, val ) {
+                items.push({'label':val.name, 'value': val.sub_category_id})
+            });
+            $("#payee").autocomplete({
+                source: items,
+                select: function( event, ui ) { //when an item is selected
+                    //use the ui.item object
+                    console.log(ui.item.value)
+                    $('#category').val(ui.item.value);
+                    $('#category').val(ui.item.value);
+                    return false;
+                },
+                focus: function(event, ui) {
+                    event.preventDefault();
+                    $(this).val(ui.item.label);
+                }
+            });
+        });
+
+        });
 </script>
